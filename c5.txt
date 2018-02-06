@@ -1,0 +1,16 @@
+#include "stdafx.h"
+#include <iostream>
+#include <unordered_set>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+	long long x = 123;
+	auto y = 1235LL;
+
+	cout << x << endl << y << endl;
+
+	return 0;
+}

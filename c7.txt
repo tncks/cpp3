@@ -1,0 +1,132 @@
+#include "stdafx.h"
+#include <iostream>
+
+typedef struct tagNode
+{
+	int Data;
+	struct tagNode* NextNode;
+} sNode;
+
+class cLinkedList {
+public:
+	sNode* CreateNode(int NewData);
+	void DeleteNode(sNode* Node);
+	void AppendNode(sNode** Head, sNode* newNode);
+	sNode* GetNode(sNode* Head, int Location);
+	void RemoveNode(sNode** Head, sNode* Remove);
+	void InsertNode(sNode* CurrentNode, sNode* NewNode);
+	int GetNodeCount(sNode* Head);
+};
+
+int main()
+{
+	class cLinkedList LinkedList;
+	//cLinkedList LinkedList;
+	int i = 0;
+	sNode* List = NULL;
+	sNode* NewNode = NULL;
+
+	for (i = 0; i < 5; ++i)
+	{
+		NewNode = LinkedList.CreateNode(i);
+		LinkedList.AppendNode(&List, NewNode);
+	}
+
+	sNode* MyNode = LinkedList.GetNode(List, 3);
+	
+	std::cout << MyNode->Data << std::endl;
+
+	LinkedList.RemoveNode(&List, MyNode);
+	LinkedList.DeleteNode(MyNode);
+
+	sNode* ExternalNode = LinkedList.CreateNode(9);
+
+	LinkedList.InsertNode(List, ExternalNode);
+
+	std::cout << LinkedList.GetNodeCount(List);
+
+    return 0;
+}
+
+sNode* cLinkedList::CreateNode(int NewData)
+{
+	sNode* NewNode = new sNode;
+	NewNode->Data = NewData;
+	NewNode->NextNode = NULL;
+	return NewNode;
+}
+
+void cLinkedList::DeleteNode(sNode* Node)
+{
+	delete Node;
+}
+
+void cLinkedList::AppendNode(sNode** Head, sNode* newNode)
+{
+	if ((*Head) == NULL)
+	{
+		(*Head) = newNode;
+	}
+	else
+	{
+		sNode* Tail = (*Head);
+		while (Tail->NextNode != NULL)
+		{
+			Tail = Tail->NextNode;
+		}
+
+		Tail->NextNode = newNode;
+	}
+}
+
+sNode* cLinkedList::GetNode(sNode* Head, int Location)
+{
+	sNode* Current = Head;
+
+	while (Current != NULL && (--Location) >= 0)
+	{
+		Current = Current->NextNode;
+	}
+	return Current;
+}
+
+void cLinkedList::RemoveNode(sNode** Head, sNode* Remove)
+{
+	if ((*Head) == Remove)
+	{
+		*Head = Remove->NextNode;
+	}
+	else
+	{
+		sNode* Current = *Head;
+
+		while (Current != NULL && Current->NextNode != Remove)
+		{
+			Current = Current->NextNode;
+		}
+
+		if (Current->NextNode != NULL)
+		{
+			Current->NextNode = Remove->NextNode;
+		}
+	}
+}
+
+void cLinkedList::InsertNode(sNode* CurrentNode, sNode* NewNode)
+{
+	NewNode->NextNode = CurrentNode->NextNode;
+	CurrentNode->NextNode = NewNode;
+}
+
+int cLinkedList::GetNodeCount(sNode* Head)
+{
+	int count = 0;
+	sNode* Current = Head;
+	while (Current != NULL)
+	{
+		Current = Current->NextNode;
+		count++;
+	}
+
+	return count;
+}

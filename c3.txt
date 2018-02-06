@@ -1,0 +1,16 @@
+#include "stdafx.h"
+#include <iostream>
+#include <unordered_map>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+	unordered_map<string, string> myMap;
+	myMap["hello"] = "World";
+	cout << myMap.at("hello") << endl;
+	cout << myMap.at("World") << endl;
+
+	return 0;
+}

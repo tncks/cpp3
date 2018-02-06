@@ -1,0 +1,22 @@
+#include "stdafx.h"
+#include <array>
+#include <iostream>
+
+
+
+int main()
+{
+	using namespace std;
+
+
+	std::array<int, 3> arr = { 1,2,3 };
+
+	cout << arr[0];
+
+	arr[2] = 4;
+
+	cout << arr[2];
+
+    return 0;
+}
+

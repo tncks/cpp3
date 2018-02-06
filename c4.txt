@@ -1,0 +1,20 @@
+#include "stdafx.h"
+#include <iostream>
+#include <unordered_set>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+	unordered_set<string> mySet;
+
+	cout << (mySet.find("2") == mySet.end()) << endl;
+
+	mySet.insert("1");
+
+	cout << (mySet.begin() == mySet.find("1")) << endl;
+	cout << (mySet.begin() == mySet.find("3")) << endl;
+
+	return 0;
+}
